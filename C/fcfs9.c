@@ -41,6 +41,33 @@ int main(){
 	}
 	sortBased(PID, BT, AT); // last argument is sorted and remaining based on the last.
 
-	
+ //Completion time.
+	int st=AT[0];
+ for(int i=0; i < n; i++){
+  if(AT[i] > st){
+   st=AT[i];
+  }
+  CT[i]=BT[i]+st;
+ }
+
+ //Turn Around Time and Waiting Time
+ for(int i=0;i <n;i++){
+
+  TAT[i]=CT[i]-AT[i];
+  WT[i]=TAT[i]-BT[i];
+
+ }
+
+ // Avg TAT, Avg WT.
+ float avgTat = 0, avgWt=0;
+ for(int i=0;i<n;i++){
+  avgTat += TAT[i];
+  avgWt += WT[i];
+ }
+  
+ float np = (float)n;
+ avgTat/=np;
+ avgWt/=np;
+ printf("%f %f",avgTat,avgWt);
 	
 }
