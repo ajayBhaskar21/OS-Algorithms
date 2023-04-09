@@ -17,15 +17,15 @@ def sortBasedonAT(PID, BT, AT, n):
                 PID[j] = t1
 
 
-def sjfBT(readyQueue, n):
+def sjfBT(readyQueue,exec, n):
     m = 9999
     for i in range(n):
-        if readyQueue[i] != -1:
+        if exec[i] == 0 and readyQueue[i] != -1:
             if m > BT[i]:
                 m = BT[i]
     
     for i in range(n):
-        if BT[i] == m:
+        if exec[i] == 0 and BT[i] == m:
             readyQueue[i] = -1
             return i
 
@@ -47,7 +47,7 @@ exec = [0] * n
 for i in range(n):
     if AT[i] == m and exec[i] == 0:
         readyQueue[i] = AT[i]
-minIndex = sjfBT(readyQueue, n)
+minIndex = sjfBT(readyQueue, exec, n)
 CT[minIndex] = AT[minIndex] + BT[minIndex]
 end = CT[minIndex]
 print("readyqueue = ", readyQueue)
@@ -60,7 +60,7 @@ for j in range(n-1):
         if AT[i] <= end and exec[i] == 0:
             readyQueue[i] = AT[i]
     print("readyqueue = ", readyQueue)
-    minIndex = sjfBT(readyQueue, n)
+    minIndex = sjfBT(readyQueue, exec, n)
     CT[minIndex] = end + BT[minIndex]
     end = CT[minIndex]
     print("readyqueue = ", readyQueue)
